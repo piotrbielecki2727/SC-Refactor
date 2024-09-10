@@ -1,5 +1,5 @@
+import cn from '@/utils';
 import { forwardRef, HTMLAttributes, TdHTMLAttributes, ThHTMLAttributes } from 'react';
-import { cn } from '@/lib/utils';
 
 const Table = forwardRef<HTMLTableElement, HTMLAttributes<HTMLTableElement>>(({ className, ...props }, ref) => (
   <table ref={ref} className={cn('w-full caption-bottom text-sm', className)} {...props} />

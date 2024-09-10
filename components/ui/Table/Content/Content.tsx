@@ -2,8 +2,7 @@ import { Cell, ColumnDef, flexRender, Row, Table as TanStackTable } from '@tanst
 import { Loader } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../base';
 import EmptyState from '@/ui/EmptyState/EmptyState';
-import { ScrollArea } from '@/ui/Scrollarea';
-import { ScrollBar } from '@/ui/Scrollbar';
+import { ScrollArea, ScrollBar } from '@/ui/Scrollarea';
 
 type ContentProps<T> = {
   table: TanStackTable<T>;

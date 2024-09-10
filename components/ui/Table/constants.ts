@@ -1,6 +1,6 @@
-import { SelectGroupType, SelectItemType } from '../Select';
+import { SelectGroupType, SelectItemType } from "../Select/types";
 
-const pageSizes = ['10', '20', '30', '40', '50'];
+const pageSizes = ['1', '3', '5', '10'];
 
 export const pageSizeGroup: SelectGroupType<SelectItemType> = {
   items: pageSizes.map((pageSize) => ({ label: pageSize, value: pageSize })),
