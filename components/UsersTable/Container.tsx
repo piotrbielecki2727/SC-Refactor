@@ -1,20 +1,10 @@
-import { User } from './types';
+import { getUsers } from '@/api/methods';
 import UsersTable from './UsersTable';
 
 const Container = async () => {
-    const users: User[] = await new Promise((resolve) =>
-        setTimeout(async () => {
-          const data = await fetch('https://jsonplaceholder.typicode.com/users')
-            .then((response) => response.json());
-          resolve(data);
-        }, 3000) 
-      );
+  const users = await getUsers();
 
-return (
-    <UsersTable users={users}/>
-)
+  return <UsersTable users={users} />;
+};
 
-  
-}
-
-export default Container
+export default Container;

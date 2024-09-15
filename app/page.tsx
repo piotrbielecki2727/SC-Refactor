@@ -1,11 +1,15 @@
-import UsersTable from "@/UsersTable";
-import TableSkeleton from "@/UsersTable/TableSkeleton";
-import { Suspense } from "react";
+import Title from '@/ui/Title/Title';
+import UsersTable from '@/UsersTable';
+import TableSkeleton from '@/UsersTable/components/TableSkeleton';
+import { Suspense } from 'react';
 
 export default function Home() {
   return (
-    <Suspense fallback={<TableSkeleton/>}>
-      <UsersTable/>
+    <div className='container'>
+      <Title title='Users' subtitle='Manage users' />
+      <Suspense fallback={<TableSkeleton />}>
+        <UsersTable />
       </Suspense>
+    </div>
   );
 }

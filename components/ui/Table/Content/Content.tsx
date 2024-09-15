@@ -16,13 +16,13 @@ const Content = <T,>({ table, columnDefs, isLoading, className }: ContentProps<T
     row
       .getVisibleCells()
       .map((cell: Cell<T, unknown>) => (
-        <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+        <TableCell className='p-3' key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
       ));
 
   const emptyResults = () => (
     <TableRow>
       <TableCell colSpan={columnDefs.length} className={`${className} text-center`}>
-        <EmptyState title='Brak wyników...' className='h-auto' />
+        <EmptyState title='Empty results...' className='h-auto' />
       </TableCell>
     </TableRow>
   );
@@ -31,7 +31,7 @@ const Content = <T,>({ table, columnDefs, isLoading, className }: ContentProps<T
     <TableRow>
       <TableCell colSpan={columnDefs.length} className='h-24 text-center'>
         <div className='flex justify-center items-center h-64'>
-          <Loader className='animate-spin mr-2' /> Ładowanie...
+          <Loader className='animate-spin mr-2' /> Loading...
         </div>
       </TableCell>
     </TableRow>
@@ -41,7 +41,7 @@ const Content = <T,>({ table, columnDefs, isLoading, className }: ContentProps<T
     <>
       <ScrollArea className={`${className} w-full `}>
         <Table className='relative'>
-          <TableHeader className='sticky top-0 z-10 bg-white shadow-md'>
+          <TableHeader className='sticky top-0 z-10 bg-white shadow-sm'>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow className='hover:bg-white' key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (

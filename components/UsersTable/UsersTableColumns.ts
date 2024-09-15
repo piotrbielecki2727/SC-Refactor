@@ -1,31 +1,29 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { User } from './types';
-import truncateText from '@/truncateText';
 
 const usersTableColumns: ColumnDef<User>[] = [
   {
     accessorKey: 'name',
-    header: 'Imię',
-    size: 200,
-    cell: ({ row }) => truncateText(row.original.name, 20),
+    header: 'Name',
+    size: 300,
+    cell: ({ row }) => row.original.name,
   },
   {
-    accessorKey: 'surname',
-    header: 'Nazwisko',
-    size: 200,
-    cell: ({ row }) => truncateText(row.original.username, 20),
+    accessorKey: 'username',
+    header: 'Username',
+    size: 300,
+    cell: ({ row }) => row.original.username,
   },
   {
     accessorKey: 'email',
-    header: 'E-mail',
-    size: 350,
+    header: 'Email',
+    size: 300,
   },
   {
     accessorKey: 'phone',
     header: 'Phone no.',
-    size: 350,
+    size: 300,
   },
 ];
-
 
 export { usersTableColumns };
