@@ -61,9 +61,9 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
     };
 
     const handleClear = () => {
-      onChange(undefined);
+      onChange('');
       debouncedSetInputValue.cancel();
-      setInputValue(undefined);
+      setInputValue('');
     };
 
     const changePasswordVisibility = () => setPasswordVisibility((passwordVisibility) => !passwordVisibility);

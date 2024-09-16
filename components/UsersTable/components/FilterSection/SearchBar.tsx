@@ -12,11 +12,11 @@ type SearchBarProps = {
 const SearchBar = ({ searchBarPlaceholder = 'Name', filterValue, setFilterValue, className }: SearchBarProps) => {
   return (
     <Input
-      debounced
       placeholder={`${searchBarPlaceholder}...`}
       value={filterValue}
       onChange={setFilterValue}
-      className={cn('h-12 ', className)}
+      className={cn('h-12', className)}
+      showClearTextButton
     />
   );
 };

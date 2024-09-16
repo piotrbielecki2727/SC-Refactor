@@ -21,8 +21,8 @@ const Content = <T,>({ table, columnDefs, isLoading, className }: ContentProps<T
 
   const emptyResults = () => (
     <TableRow>
-      <TableCell colSpan={columnDefs.length} className={`${className} text-center`}>
-        <EmptyState title='Empty results...' className='h-auto' />
+      <TableCell colSpan={columnDefs.length} className={`${className} text-center hover:bg-background bg-background`}>
+        <EmptyState title='Empty results...' className='h-auto bg-background hover:bg-background' />
       </TableCell>
     </TableRow>
   );
@@ -41,9 +41,9 @@ const Content = <T,>({ table, columnDefs, isLoading, className }: ContentProps<T
     <>
       <ScrollArea className={`${className} w-full min-h-[30rem] `}>
         <Table className='relative'>
-          <TableHeader className='sticky top-0 z-10 bg-white shadow-sm'>
+          <TableHeader className='sticky top-0 z-10  shadow-sm'>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow className='hover:bg-white' key={headerGroup.id}>
+              <TableRow className='hover:bg-background' key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <TableHead
                     key={header.id}
@@ -61,11 +61,7 @@ const Content = <T,>({ table, columnDefs, isLoading, className }: ContentProps<T
           <TableBody>
             {!isLoading
               ? table.getRowModel().rows?.length
-                ? table.getRowModel().rows.map((row) => (
-                    <TableRow key={row.id}>
-                      {renderTableRows(row)}
-                    </TableRow>
-                  ))
+                ? table.getRowModel().rows.map((row) => <TableRow key={row.id}>{renderTableRows(row)}</TableRow>)
                 : emptyResults()
               : renderLoader()}
           </TableBody>
