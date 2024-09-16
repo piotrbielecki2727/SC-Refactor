@@ -11,9 +11,9 @@ export const getUsers = async (): Promise<User[]> => {
     return userData;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error('Wystąpił błąd: ', error);
+      throw new Error('An error occurred: ' + error.message);
     } else {
-      throw new Error('Wystąpił nieznany błąd');
+      throw new Error('An unknown error occurred');
     }
   }
 };
