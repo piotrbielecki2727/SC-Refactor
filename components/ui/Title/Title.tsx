@@ -14,7 +14,7 @@ const Title: FC<TitleProps> = ({ title, subtitle }) => {
       <div className='py-1 flex flex-row items-center justify-between'>
         <div className='flex flex-col'>
           <span className='text-2xl sm:text-3xl font-bold'>{title}</span>
-          <span className='text-gray-600 mt-1'>{subtitle}</span>
+          <span className='text-gray-400 mt-1'>{subtitle}</span>
         </div>
         <div>
           <ChangingTheme />

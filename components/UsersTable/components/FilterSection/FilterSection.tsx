@@ -25,7 +25,7 @@ const FilterSection = ({ setFilterValues, filterValues }: FilterSectionProps) =>
       <div className='flex flex-row justify-between items-end mt-2'>
         <span>Search:</span>
       </div>
-      <div className=' grid grid-cols-5 gap-x-6 py-1 items-center'>
+      <div className=' grid grid-cols-1 gap-y-2  sm:grid-cols-2 md:grid-cols-5 md:gap-y-2 lg:grid-cols-5 gap-x-6 py-1 items-center'>
         {Object.entries(filterValues).map(([key, value]) => (
           <div key={key} className='flex items-center justify-start '>
             <SearchBar
@@ -44,7 +44,11 @@ const FilterSection = ({ setFilterValues, filterValues }: FilterSectionProps) =>
         ))}
 
         {isFilterApplied && (
-          <Button onClick={handleResetFilterValues} icon={Trash}>
+          <Button
+            className='col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1'
+            onClick={handleResetFilterValues}
+            icon={Trash}
+          >
             Reset filters
           </Button>
         )}

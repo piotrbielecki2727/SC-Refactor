@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 
 export default function Home() {
   return (
-    <div className='container'>
+    <div className='container py-4'>
       <Title title='Users' subtitle='Manage users' />
       <Suspense fallback={<TableSkeleton />}>
         <UsersTable />
