@@ -13,11 +13,11 @@ type ContentProps<T> = {
 
 const Content = <T,>({ table, columnDefs, isLoading, className }: ContentProps<T>) => {
   const renderTableRows = (row: Row<T>) =>
-    row
-      .getVisibleCells()
-      .map((cell: Cell<T, unknown>) => (
-        <TableCell className='p-3' key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-      ));
+    row.getVisibleCells().map((cell: Cell<T, unknown>) => (
+      <TableCell className='p-3' key={cell.id}>
+        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+      </TableCell>
+    ));
 
   const emptyResults = () => (
     <TableRow>
@@ -39,7 +39,7 @@ const Content = <T,>({ table, columnDefs, isLoading, className }: ContentProps<T
 
   return (
     <>
-      <ScrollArea className={`${className} w-full `}>
+      <ScrollArea className={`${className} w-full min-h-[30rem] `}>
         <Table className='relative'>
           <TableHeader className='sticky top-0 z-10 bg-white shadow-sm'>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -61,8 +61,8 @@ const Content = <T,>({ table, columnDefs, isLoading, className }: ContentProps<T
           <TableBody>
             {!isLoading
               ? table.getRowModel().rows?.length
-                ? table.getRowModel().rows.map((row, index) => (
-                    <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                ? table.getRowModel().rows.map((row) => (
+                    <TableRow key={row.id}>
                       {renderTableRows(row)}
                     </TableRow>
                   ))

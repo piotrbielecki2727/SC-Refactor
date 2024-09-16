@@ -1,33 +1,29 @@
+import { useMemo } from 'react';
 import { FilterValues } from './components/FilterSection/types';
 import { User } from './types';
 
-export function normalizeFilterValues(filterValues: FilterValues): FilterValues {
-  return Object.entries(filterValues).reduce((acc, [key, value]) => {
-    const typedKey = key as keyof FilterValues;
-    acc[typedKey] = String(value).toLowerCase();
-    return acc;
-  }, {} as FilterValues);
-}
+export const checkIfFilterIsApplied = (filterValues: FilterValues) => {
+  const isFilterApplied = Object.values(filterValues).some((value) => value);
+  return isFilterApplied;
+};
 
-export function normalizeUser(user: User): User {
-  return {
-    ...user,
-    name: user.name.toLowerCase(),
-    username: user.username.toLowerCase(),
-    email: user.email.toLowerCase(),
-    phone: user.phone,
-  };
-}
+type filterUsers = {
+  isFilterApplied: boolean;
+  filterValues: FilterValues;
+  data: User[];
+};
 
-export function filterUsers(data: User[], normalizedFilterValues: FilterValues): User[] {
-  return data.filter((user) => {
-    const normalizedUser = normalizeUser(user);
-    const { name, username, email, phone } = normalizedFilterValues;
-    return (
-      (name === '' || normalizedUser.name.includes(name)) &&
-      (username === '' || normalizedUser.username.includes(username)) &&
-      (email === '' || normalizedUser.email.includes(email)) &&
-      (phone === '' || normalizedUser.phone.includes(phone))
+export const filterUsers = ({ isFilterApplied, filterValues, data }: filterUsers): User[] => {
+  return useMemo(() => {
+    if (!isFilterApplied) return data;
+    return data.filter((user) =>
+      Object.entries(filterValues).every(([key, value]) => {
+        if (value) {
+          const userValue = user[key as keyof User];
+          return userValue && userValue.toLowerCase().includes(value.toLowerCase());
+        }
+        return true;
+      })
     );
-  });
-}
+  }, [data, filterValues]);
+};

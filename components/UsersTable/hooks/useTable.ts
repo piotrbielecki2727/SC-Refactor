@@ -1,7 +1,8 @@
 import { getCoreRowModel, getFilteredRowModel, useReactTable, ColumnDef } from '@tanstack/react-table';
+import { useMemo } from 'react';
 
 type useTable<T> = {
-  data?: T[];
+  data: T[];
   columns: ColumnDef<T>[];
 };
 
@@ -13,7 +14,13 @@ function useTable<T>({ data, columns }: useTable<T>) {
     getFilteredRowModel: getFilteredRowModel(),
   });
 
-  return { columnDefs: columns, table };
+  return useMemo(
+    () => ({
+      columnDefs: columns,
+      table,
+    }),
+    [columns, table]
+  );
 }
 
 export default useTable;

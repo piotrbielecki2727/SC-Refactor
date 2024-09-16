@@ -1,22 +1,15 @@
 import { useMemo } from 'react';
 import { User } from '../types';
 import { FilterValues } from '../components/FilterSection/types';
-import { filterUsers, normalizeFilterValues } from '../utils';
+import { checkIfFilterIsApplied, filterUsers } from '../utils';
 
 type useFilterDataProps = {
-  data?: User[];
+  data: User[];
   filterValues: FilterValues;
 };
 
-function useFilterData({ data, filterValues }: useFilterDataProps) {
-  const filteredUsers = useMemo(() => {
-    if (!data) return [];
-
-    const normalizedFilterValues = normalizeFilterValues(filterValues);
-    return filterUsers(data, normalizedFilterValues);
-  }, [data, filterValues]);
-
+export const useFilterData = ({ data, filterValues }: useFilterDataProps) => {
+  const isFilterApplied = checkIfFilterIsApplied(filterValues);
+  const filteredUsers = filterUsers({ isFilterApplied, data, filterValues });
   return { filteredUsers };
-}
-
-export default useFilterData;
+};
