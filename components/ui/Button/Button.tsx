@@ -1,11 +1,13 @@
 'use client';
 
 import { FC, forwardRef, ReactNode, useCallback } from 'react';
-import { twMerge } from 'tailwind-merge';
 import { Loader2, LucideIcon } from 'lucide-react';
 import { Url } from 'next/dist/shared/lib/router/router';
 import Link from 'next/link';
 import { ButtonProps, ShadcnButton } from './base';
+import styled, { css, CSSProperties } from 'styled-components';
+
+type ButtonColor = 'default' | 'success' | 'error' | 'warning' | 'info' | 'theme';
 
 type Props = ButtonProps & {
   icon?: LucideIcon;
@@ -14,18 +16,54 @@ type Props = ButtonProps & {
   reverseIcon?: boolean;
   children?: ReactNode;
   className?: string;
+  color?: ButtonColor;
   variant?: 'outline' | 'secondary' | 'default' | 'link' | 'ghost';
-  color?: 'error' | 'warning' | 'info' | 'success' | 'default' | 'gray';
+  width?: string;
+  isBorder?: boolean;
 };
 
 const buttonColors = {
-  default: '',
-  success: 'bg-green-600 hover:bg-green-700',
-  error: 'bg-red-600 hover:bg-red-700',
-  warning: 'bg-orange-600 hover:bg-orange-700',
-  info: 'bg-blue-600 hover:bg-blue-700',
-  gray: 'bg-gray-600 hover:bg-gray-700',
+  default: css``,
+  success: css`
+    background-color: #16a34a;
+    &:hover {
+      background-color: #15803d;
+    }
+  `,
+  error: css`
+    background-color: #dc2626;
+    &:hover {
+      background-color: #b91c1c;
+    }
+  `,
+  warning: css`
+    background-color: #f97316;
+    &:hover {
+      background-color: #ea580c;
+    }
+  `,
+  info: css`
+    background-color: #3b82f6;
+    &:hover {
+      background-color: #2563eb;
+    }
+  `,
+  theme: css`
+    background-color: ${({ theme }) => theme.text};
+    color: ${({ theme }) => theme.body};
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.hoverColor};
+    }
+  `,
 };
+
+const StyledButton = styled(ShadcnButton)<Props>`
+  ${({ color = 'default' }) => buttonColors[color]};
+  gap: 4px;
+  ${({ width }) => width && `width: ${width};`}
+  border-radius: 6px;
+  ${({ isBorder, theme }) => (isBorder ? `border: 1px solid ${theme.colors.secondary};` : `border: none;`)}
+`;
 
 const Button: FC<Props> = forwardRef<HTMLButtonElement, Props>(
   (
@@ -42,6 +80,7 @@ const Button: FC<Props> = forwardRef<HTMLButtonElement, Props>(
       asChild,
       href,
       reverseIcon,
+      isBorder,
       children,
       ...buttonProps
     },
@@ -65,22 +104,21 @@ const Button: FC<Props> = forwardRef<HTMLButtonElement, Props>(
       return content;
     }, [asChild, children, href, Icon, isLoading, reverseIcon]);
 
-    const buttonElement = (
-      <ShadcnButton
+    return (
+      <StyledButton
         ref={ref}
         onClick={onClick}
         disabled={isLoading || disabled}
         size={size}
-        className={twMerge('gap-x-1', className, buttonColors[color])}
+        color={color}
         variant={variant}
         asChild={asChild}
+        isBorder={isBorder}
         {...buttonProps}
       >
         {renderContent()}
-      </ShadcnButton>
+      </StyledButton>
     );
-
-    return buttonElement;
   }
 );
 

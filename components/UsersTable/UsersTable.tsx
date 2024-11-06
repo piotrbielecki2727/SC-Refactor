@@ -8,8 +8,9 @@ import { User } from './types';
 import { FilterValues } from './components/FilterSection/types';
 import { usersTableColumns } from './UsersTableColumns';
 import { RootState } from '@/store/store';
-import { filterUsers, resetFilterValues, setFilterValues } from '@/store/usersSlice';
+import { filterUsers, setFilterValues } from '@/store/usersSlice';
 import useTable from './hooks/useTable';
+import styled from 'styled-components';
 
 type UsersTableProps = {
   users: User[];
@@ -36,6 +37,11 @@ const UsersTable = ({ users }: UsersTableProps) => {
     data: filteredUsers,
   });
 
+  const StyledScrollArea = styled(ScrollArea)`
+    border-radius: 6px;
+    border: 1px solid ${({ theme }) => theme.colors.secondary};
+  `;
+
   return (
     <Table>
       <Table.Header>
@@ -47,9 +53,9 @@ const UsersTable = ({ users }: UsersTableProps) => {
           filterValues={filterValues}
         />
       </Table.Header>
-      <ScrollArea className='rounded-md border'>
+      <StyledScrollArea>
         <Table.Content table={table} columnDefs={columnDefs} />
-      </ScrollArea>
+      </StyledScrollArea>
     </Table>
   );
 };

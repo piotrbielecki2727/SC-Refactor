@@ -1,5 +1,5 @@
 import Input, { TInputValue } from '@/ui/Input';
-import cn from '@/utils';
+import styled from 'styled-components';
 
 type SearchBarProps = {
   columnToFilter?: string;
@@ -9,13 +9,20 @@ type SearchBarProps = {
   className?: string;
 };
 
+const StyledInput = styled(Input)`
+  height: 3rem;
+  border: 1px solid ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.text};
+  border-radius: 6px;
+  width: 100%;
+`;
+
 const SearchBar = ({ searchBarPlaceholder = 'Name', filterValue, setFilterValue, className }: SearchBarProps) => {
   return (
-    <Input
+    <StyledInput
       placeholder={`${searchBarPlaceholder}...`}
       value={filterValue}
       onChange={setFilterValue}
-      className={cn('h-12', className)}
       showClearTextButton
     />
   );

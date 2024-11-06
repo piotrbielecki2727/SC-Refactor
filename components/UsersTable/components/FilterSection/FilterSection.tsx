@@ -1,9 +1,9 @@
-import Button from '@/ui/Button';
-import SearchBar from './SearchBar';
 import { FilterValues } from './types';
 import { Trash } from 'lucide-react';
 import { filterUsers, resetFilterValues } from '@/store/usersSlice';
 import { useDispatch } from 'react-redux';
+import * as S from './styled';
+import Button from '@/ui/Button';
 
 type FilterSectionProps = {
   setFilterValues: (updater: (prevValues: FilterValues) => FilterValues) => void;
@@ -21,15 +21,14 @@ const FilterSection = ({ setFilterValues, filterValues }: FilterSectionProps) =>
   const isFilterApplied = Object.values(filterValues).some((value) => value);
 
   return (
-    <div className='flex flex-col min-w-full gap-y-2'>
-      <div className='flex flex-row justify-between items-end mt-2'>
+    <S.FilterSectionContainer>
+      <S.Search>
         <span>Search:</span>
-      </div>
-      <div className=' grid grid-cols-1 gap-y-2  sm:grid-cols-2 md:grid-cols-5 md:gap-y-2 lg:grid-cols-5 gap-x-6 py-1 items-center'>
+      </S.Search>
+      <S.GridDiv>
         {Object.entries(filterValues).map(([key, value]) => (
-          <div key={key} className='flex items-center justify-start '>
-            <SearchBar
-              className='w-full'
+          <S.SearchBarContainer key={key}>
+            <S.StyledSearchBar
               searchBarPlaceholder={`Filter by ${key}`}
               columnToFilter={key}
               filterValue={value}
@@ -40,20 +39,16 @@ const FilterSection = ({ setFilterValues, filterValues }: FilterSectionProps) =>
                 }))
               }
             />
-          </div>
+          </S.SearchBarContainer>
         ))}
 
         {isFilterApplied && (
-          <Button
-            className='col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1'
-            onClick={handleResetFilterValues}
-            icon={Trash}
-          >
+          <Button width='100%' onClick={handleResetFilterValues} color='theme' icon={Trash}>
             Reset filters
           </Button>
         )}
-      </div>
-    </div>
+      </S.GridDiv>
+    </S.FilterSectionContainer>
   );
 };
 

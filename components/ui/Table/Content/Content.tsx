@@ -3,6 +3,8 @@ import { Loader } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../base';
 import EmptyState from '@/ui/EmptyState/EmptyState';
 import { ScrollArea, ScrollBar } from '@/ui/Scrollarea';
+import styled from 'styled-components';
+import * as S from './styled';
 
 type ContentProps<T> = {
   table: TanStackTable<T>;
@@ -13,37 +15,37 @@ type ContentProps<T> = {
 
 const Content = <T,>({ table, columnDefs, isLoading, className }: ContentProps<T>) => {
   const renderTableRows = (row: Row<T>) =>
-    row.getVisibleCells().map((cell: Cell<T, unknown>) => (
-      <TableCell className='p-3' key={cell.id}>
-        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-      </TableCell>
-    ));
+    row
+      .getVisibleCells()
+      .map((cell: Cell<T, unknown>) => (
+        <S.StyledCell1 key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</S.StyledCell1>
+      ));
 
   const emptyResults = () => (
     <TableRow>
-      <TableCell colSpan={columnDefs.length} className={`${className} text-center hover:bg-background bg-background`}>
-        <EmptyState title='Empty results...' className='h-auto bg-background hover:bg-background' />
-      </TableCell>
+      <S.StyledCell2 colSpan={columnDefs.length}>
+        <S.StyledEmptyState title='Empty results...' />
+      </S.StyledCell2>
     </TableRow>
   );
 
   const renderLoader = () => (
     <TableRow>
-      <TableCell colSpan={columnDefs.length} className='h-24 text-center'>
-        <div className='flex justify-center items-center h-64'>
-          <Loader className='animate-spin mr-2' /> Loading...
-        </div>
-      </TableCell>
+      <S.StyledLoaderCell colSpan={columnDefs.length}>
+        <S.StyledLoaderDiv>
+          <S.StyledLoader /> Loading...
+        </S.StyledLoaderDiv>
+      </S.StyledLoaderCell>
     </TableRow>
   );
 
   return (
     <>
-      <ScrollArea className={`${className} w-full min-h-[30rem] `}>
-        <Table className='relative'>
-          <TableHeader className='sticky top-0 z-10  shadow-sm'>
+      <S.StyledScrollArea>
+        <S.StyledTable>
+          <S.StyledTableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow className='hover:bg-background' key={headerGroup.id}>
+              <S.StyledTableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <TableHead
                     key={header.id}
@@ -55,18 +57,20 @@ const Content = <T,>({ table, columnDefs, isLoading, className }: ContentProps<T
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
                 ))}
-              </TableRow>
+              </S.StyledTableRow>
             ))}
-          </TableHeader>
+          </S.StyledTableHeader>
           <TableBody>
             {!isLoading
               ? table.getRowModel().rows?.length
-                ? table.getRowModel().rows.map((row) => <TableRow key={row.id}>{renderTableRows(row)}</TableRow>)
+                ? table
+                    .getRowModel()
+                    .rows.map((row) => <S.StyledTableBodyRow key={row.id}>{renderTableRows(row)}</S.StyledTableBodyRow>)
                 : emptyResults()
               : renderLoader()}
           </TableBody>
-        </Table>
-      </ScrollArea>
+        </S.StyledTable>
+      </S.StyledScrollArea>
       <ScrollBar orientation='horizontal' />
     </>
   );

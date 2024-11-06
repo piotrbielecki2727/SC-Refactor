@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import ReactReduxProvider from './reduxprovider';
-import { ThemeProvider } from 'next-themes';
+import StyledComponentsRegistry from '@/registry';
+import { ThemeProvider } from '@/ThemeProvider';
+import { GlobalStyles } from './GlobalStyles';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -27,10 +29,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-          <ReactReduxProvider>{children}</ReactReduxProvider>
-        </ThemeProvider>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased `}>
+        <StyledComponentsRegistry>
+          <ReactReduxProvider>
+            <ThemeProvider>
+              <GlobalStyles />
+              {children}
+            </ThemeProvider>
+          </ReactReduxProvider>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

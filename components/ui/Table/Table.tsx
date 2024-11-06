@@ -3,14 +3,19 @@ import Header from './Header';
 import Content from './Content';
 import Footer from './Footer';
 import { twMerge } from 'tailwind-merge';
+import styled from 'styled-components';
 
 type TTableProps = {
   className?: string;
   children: ReactNode;
 };
 
+const StyledTable = styled.div`
+  width: 100%;
+`;
+
 const Table = ({ children, className }: TTableProps) => {
-  return <div className={twMerge(className, 'w-full')}>{children}</div>;
+  return <StyledTable>{children}</StyledTable>;
 };
 
 Table.Header = Header;

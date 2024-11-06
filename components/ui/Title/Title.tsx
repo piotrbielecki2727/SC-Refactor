@@ -1,7 +1,7 @@
 'use client';
 import { FC } from 'react';
-import Separator from '../Separator';
 import ChangingTheme from '../ChangingTheme';
+import * as S from './styled';
 
 type TitleProps = {
   title: string;
@@ -11,16 +11,16 @@ type TitleProps = {
 const Title: FC<TitleProps> = ({ title, subtitle }) => {
   return (
     <div>
-      <div className='py-1 flex flex-row items-center justify-between'>
-        <div className='flex flex-col'>
-          <span className='text-2xl sm:text-3xl font-bold'>{title}</span>
-          <span className='text-gray-400 mt-1'>{subtitle}</span>
-        </div>
+      <S.Container>
+        <S.TitleWrapper>
+          <S.TitleText>{title}</S.TitleText>
+          {subtitle && <S.SubtitleText>{subtitle}</S.SubtitleText>}
+        </S.TitleWrapper>
         <div>
           <ChangingTheme />
         </div>
-      </div>
-      <Separator className='my-1' />
+      </S.Container>
+      <S.StyledSeparator />
     </div>
   );
 };
