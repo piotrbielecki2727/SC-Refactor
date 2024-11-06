@@ -43,9 +43,11 @@ const FilterSection = ({ setFilterValues, filterValues }: FilterSectionProps) =>
         ))}
 
         {isFilterApplied && (
-          <Button width='100%' onClick={handleResetFilterValues} color='theme' icon={Trash}>
-            Reset filters
-          </Button>
+          <S.ButtonDiv>
+            <Button width='100%' onClick={handleResetFilterValues} color='theme' icon={Trash}>
+              Reset filters
+            </Button>
+          </S.ButtonDiv>
         )}
       </S.GridDiv>
     </S.FilterSectionContainer>

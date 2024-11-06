@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import SearchBar from './SearchBar';
-import Button from '@/ui/Button';
 
 const FilterSectionContainer = styled.div`
   display: flex;
@@ -44,4 +43,15 @@ const StyledSearchBar = styled(SearchBar)`
   width: 100%;
 `;
 
-export { FilterSectionContainer, GridDiv, Search, SearchBarContainer, StyledSearchBar };
+const ButtonDiv = styled.div`
+  @media (max-width: 768px) {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 640px) {
+    grid-column: span 1;
+  }
+  width: 100%;
+`;
+
+export { FilterSectionContainer, GridDiv, Search, SearchBarContainer, StyledSearchBar, ButtonDiv };
