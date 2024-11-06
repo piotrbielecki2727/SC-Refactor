@@ -65,7 +65,7 @@ const StyledTableRow = styled(TableRow)`
 const StyledTableBodyRow = styled(TableRow)`
   border-color: ${({ theme }) => theme.colors.secondary};
   &:hover {
-    background-color: ${({ theme }) => theme.colors.secondary};
+    background-color: ${({ theme }) => theme.colors.rowHoverColor};
   }
 `;
 

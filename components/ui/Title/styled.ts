@@ -30,6 +30,7 @@ const SubtitleText = styled.span`
 
 const StyledSeparator = styled(Separator)`
   margin: 0.25rem 0;
+  background-color: ${({ theme }) => theme.colors.secondary};
 `;
 
 export { Container, StyledSeparator, SubtitleText, TitleText, TitleWrapper };

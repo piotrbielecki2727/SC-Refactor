@@ -6,10 +6,11 @@ type HeaderProps<T> = {
 };
 
 const StyledHeader = styled.div`
-  padding: 0.25rem;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  gap: 16px;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
   justify-items: center;
 `;
 

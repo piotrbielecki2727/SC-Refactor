@@ -9,6 +9,7 @@ export const lightTheme = {
     primary: '#0070f3',
     secondary: '#d4d4d8',
     hoverColor: '#262626',
+    rowHoverColor: '#f4f4f5',
 
     background: {
       primary: '#fff',
@@ -41,6 +42,7 @@ export const darkTheme = {
     primary: '#0070f3',
     secondary: '#3f3f46',
     hoverColor: '#e5e7eb',
+    rowHoverColor: '#27272a',
 
     background: {
       primary: '#000',
